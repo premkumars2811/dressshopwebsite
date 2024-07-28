@@ -1,24 +1,55 @@
-import React from "react";
-import { Provider } from 'react-redux';
-import store from "./Store";
+import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-import Routing from "./Routing";
-import Header from "./heading";
+import Routing from "./Routing component/Routing";
 
 
 function App(){
-  return(
+    const [cartItem,setcartItem]=useState([]);
+    const addtocart=(Men)=>{
+    const exist =cartItem.find((x)=>{
+    return x.id ===Men.id;
+    
+  })
+  if(exist){
+    alert("This product is already added")
+  }
+  else{
+    setcartItem(([...cartItem,{...Men,quantity:1}]))
+  }
+
+  const addtocarts=(Women)=>{
+    const exist =cartItem.find((x)=>{
+    return x.id ===Women.id;
+  })
+  if(exist){
+    alert("This product is already added")
+  }
+  else{
+    setcartItem(([...cartItem,{...Women,quantity:1}]))
+  }
+  }
+const addtocart=(Kids)=>{
+  const exist =cartItem.find((x)=>{
+    return x.id ===Kids.id;
+        
+  })
+  if(exist){
+  alert("This product is already added")
+}
+else{
+  setcartItem(([...cartItem,{...Kids,quantity:1}]))
+}
+}
+   console.log(setcartItem)
+   }
+   
+return(
 
     <BrowserRouter>
- <Provider store ={store}>
- 
-  <Routing/>
-
-</Provider>
-</BrowserRouter>
-
-
-
-  )
+    <Routing addtocart={addtocart}  cartItem={cartItem} setcartItem={setcartItem}/>
+    </BrowserRouter>
+    
+)
 }
+
 export default App;

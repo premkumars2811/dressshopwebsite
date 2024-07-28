@@ -8,28 +8,28 @@ const Authdetails =()=>{
     const navigate=useNavigate();
     useEffect(()=>{
         const listen= onAuthStateChanged(auth,(user)=>{
-if (user){
+    if (user){
     setauthuser(user)
-}
-else{
+     }
+    else{
     setauthuser(null);
-}
-        })
+     }
+    })
 
-        return ()=>{
-            listen();
-        }
-    },[]);
-    const usersignout=()=>{
-        signOut(auth).then(()=>{
-            console.log('sign out successfully');
-           navigate('/Signin')
-        }).catch(error=>console.log(error))
+return ()=>{
+     listen();
     }
-    return(
-<div>
-    
-<button className="authbutton" onClick={usersignout}><MdOutlineLogout/>Logout</button> </div>
+    },[]);
+const usersignout=()=>{
+    signOut(auth).then(()=>{
+    console.log('sign out successfully');
+    navigate('/Signin')
+    }).catch(error=>console.log(error))
+    }
+return(
+    <div className="auth">
+    <button className="authbutton" onClick={usersignout}><MdOutlineLogout/>Logout</button> 
+    </div>
     )
-}
+    }
 export default Authdetails;
